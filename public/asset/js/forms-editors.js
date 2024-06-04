@@ -1,93 +1,15 @@
-/**
- * Form Editors
- */
-
-'use strict';
-
-(function () {
-  // Snow Theme
-  // --------------------------------------------------------------------
-  const snowEditor = new Quill('#snow-editor', {
-    bounds: '#snow-editor',
-    modules: {
-      formula: true,
-      toolbar: '#snow-toolbar'
-    },
+// Menyiapkan Quill editor
+var quill = new Quill('#snow-editor', {
     theme: 'snow'
-  });
+});
 
-  // Bubble Theme
-  // --------------------------------------------------------------------
-  const bubbleEditor = new Quill('#bubble-editor', {
-    modules: {
-      toolbar: '#bubble-toolbar'
-    },
-    theme: 'bubble'
-  });
+// Fungsi untuk menangkap konten editor dan menyimpannya ke dalam input tersembunyi
+function saveEditorContent() {
+    var editorContent = document.querySelector('.ql-editor').innerHTML;
+    document.getElementById('snow-editor-content').value = editorContent;
+}
 
-  // Full Toolbar
-  // --------------------------------------------------------------------
-  const fullToolbar = [
-    [
-      {
-        font: []
-      },
-      {
-        size: []
-      }
-    ],
-    ['bold', 'italic', 'underline', 'strike'],
-    [
-      {
-        color: []
-      },
-      {
-        background: []
-      }
-    ],
-    [
-      {
-        script: 'super'
-      },
-      {
-        script: 'sub'
-      }
-    ],
-    [
-      {
-        header: '1'
-      },
-      {
-        header: '2'
-      },
-      'blockquote',
-      'code-block'
-    ],
-    [
-      {
-        list: 'ordered'
-      },
-      {
-        list: 'bullet'
-      },
-      {
-        indent: '-1'
-      },
-      {
-        indent: '+1'
-      }
-    ],
-    [{ direction: 'rtl' }],
-    ['link', 'image', 'video', 'formula'],
-    ['clean']
-  ];
-  const fullEditor = new Quill('#full-editor', {
-    bounds: '#full-editor',
-    placeholder: 'Type Something...',
-    modules: {
-      formula: true,
-      toolbar: fullToolbar
-    },
-    theme: 'snow'
-  });
-})();
+// Memanggil fungsi saveEditorContent saat formulir diserahkan
+$('form').submit(function() {
+    saveEditorContent();
+});
