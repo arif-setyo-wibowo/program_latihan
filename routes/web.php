@@ -7,6 +7,7 @@ use App\Http\Controllers\CaborController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\AtletController;
+use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\LanggananController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,8 +22,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(FrontController::class)->group(function () {
+    Route::get('/', 'index')->name('landing');
+});
+
+Route::controller(FrontController::class)->group(function () {
+    Route::get('/home', 'home')->name('home');
+    Route::get('/course/{id}', 'course')->name('course');
 });
 
 Route::controller(LoginController::class)->prefix('admin/login')->group(function () {
@@ -90,10 +96,6 @@ Route::get('/landing', function () {
 
 Route::get('/profile', function () {
     return view('front/profile');
-});
-
-Route::get('/home', function () {
-    return view('front/home');
 });
 
 Route::get('/course', function () {
