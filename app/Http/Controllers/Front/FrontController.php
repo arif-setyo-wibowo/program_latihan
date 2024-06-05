@@ -22,14 +22,14 @@ class FrontController extends Controller
         //filter cabor
         $param = $request->query('cabor');
         if ($param == null){
-            $materi = Materi::all();
+            $materi = Materi::paginate(10);
         }else{
             if($param == "All"){
-                $materi = Materi::all();
+                $materi = Materi::paginate(10);
             }else{
                 $materi = Materi::whereHas('cabor', function ($query) use ($param) {
                     $query->where('nama_cabor', $param);
-                })->get();
+                })->paginate(20);
             }
         }
 
