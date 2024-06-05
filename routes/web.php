@@ -59,3 +59,35 @@ Route::middleware('petugas')->prefix('/admin')->group(function () {
 
 
 });
+
+Route::get('/login', function () {
+    return view('front/login');
+});
+
+Route::get('/forgot', function () {
+    return view('front/forgot-password');
+});
+
+Route::get('/new', function () {
+    return view('front/new-password');
+});
+
+Route::get('/landing', function () {
+    return view('front/landing');
+});
+
+Route::get('/profile', function () {
+    return view('front/profile');
+});
+
+Route::get('/home', function () {
+    return view('front/home');
+});
+
+Route::get('/course', function () {
+    return view('front/course');
+});
+
+Route::get('/payment', function () {
+    return view('front/payment');
+});
