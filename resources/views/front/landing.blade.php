@@ -238,29 +238,26 @@
                     src="{{ asset('asset') }}/img/front-pages/icons/section-tilte-icon.png"
                     alt="section title icon"
                     class="me-2" />
-                <span class="text-uppercase">Useful features</span>
+                <span class="text-uppercase">Fitur</span>
             </h6>
-            <h3 class="text-center mb-2"><span class="fw-bold">Everything you need</span> to start your next project</h3>
-            <p class="text-center fw-medium mb-3 mb-md-5 pb-3">
-                Not just a set of tools, the package includes ready-to-deploy conceptual application.
-            </p>
-            <div class="features-icon-wrapper row gx-0 gy-4 g-sm-5">
+            <h3 class="text-center mb-2"><span class="fw-bold">Semua yang anda butuhkan</span> untuk membangun karir yang profesional</h3>
+            <div class="features-icon-wrapper row gx-0 gy-4 g-sm-5 mt-3">
                 <div class="col-lg-4 col-sm-6 text-center features-icon-box">
                     <div class="features-icon mb-3">
                         <img src="{{ asset('asset') }}/img/front-pages/icons/laptop-charging.png" alt="laptop charging" />
                     </div>
-                    <h5 class="mb-2">Quality Code</h5>
+                    <h5 class="mb-2">Materi Berkualitas</h5>
                     <p class="features-icon-description">
-                        Code structure that all developers will easily understand and fall in love with.
+                        Dapatkan materi-materi yang ditulis para ahli di bidangnya.
                     </p>
                 </div>
                 <div class="col-lg-4 col-sm-6 text-center features-icon-box">
                     <div class="features-icon mb-3">
                         <img src="{{ asset('asset') }}/img/front-pages/icons/transition-up.png" alt="transition up" />
                     </div>
-                    <h5 class="mb-2">Continuous Updates</h5>
+                    <h5 class="mb-2">Update Berkala</h5>
                     <p class="features-icon-description">
-                        Free updates for the next 12 months, including new demos and features.
+                        Materi-materi diperbarui secara berkala.
                     </p>
                 </div>
                 <div class="col-lg-4 col-sm-6 text-center features-icon-box">
@@ -269,31 +266,8 @@
                     </div>
                     <h5 class="mb-2">Stater-Kit</h5>
                     <p class="features-icon-description">
-                        Start your project quickly without having to remove unnecessary features.
+                        Cukup bayar 1 kali, dapatkan semua materi.
                     </p>
-                </div>
-                <div class="col-lg-4 col-sm-6 text-center features-icon-box">
-                    <div class="features-icon mb-3">
-                        <img src="{{ asset('asset') }}/img/front-pages/icons/3d-select-solid.png" alt="3d select solid" />
-                    </div>
-                    <h5 class="mb-2">API Ready</h5>
-                    <p class="features-icon-description">
-                        Just change the endpoint and see your own data loaded within seconds.
-                    </p>
-                </div>
-                <div class="col-lg-4 col-sm-6 text-center features-icon-box">
-                    <div class="features-icon mb-3">
-                        <img src="{{ asset('asset') }}/img/front-pages/icons/lifebelt.png" alt="lifebelt" />
-                    </div>
-                    <h5 class="mb-2">Excellent Support</h5>
-                    <p class="features-icon-description">An easy-to-follow doc with lots of references and code examples.</p>
-                </div>
-                <div class="col-lg-4 col-sm-6 text-center features-icon-box">
-                    <div class="features-icon mb-3">
-                        <img src="{{ asset('asset') }}/img/front-pages/icons/google-docs.png" alt="google docs" />
-                    </div>
-                    <h5 class="mb-2">Well Documented</h5>
-                    <p class="features-icon-description">An easy-to-follow doc with lots of references and code examples.</p>
                 </div>
             </div>
         </div>
@@ -323,82 +297,82 @@
             </p>
             <div class="row gy-4 pt-lg-3">
                 <!-- Favourite Plan: Start -->
-                @foreach ($langganan as $item)
-                <div class="col-xl-4 col-lg-6">
-                    <div class="card shadow-none">
-                        <div class="card-header border-0">
-                            <h3 class="mb-2 pb-1">{{ $item->nama_langganan}}</h3>
-                            <div class="d-flex align-items-center">
-                                <h5 class="d-flex mb-0"><sup class="h5 mt-3">Rp.</sup><span class="display-5 fw-bold">{{ number_format($item->harga, 0, ',', '.') }}</span></h5>
-                                <div class="ms-2 ps-1">
-                                    <h6 class="mb-1">/ {{ $item->lama_langganan}}</h6>
-                                </div>
-                            </div>
-                            <img src="{{ asset('asset') }}/img/front-pages/icons/smiling-icon.png" alt="smiling icon" />
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-unstyled">
-                                <li>
-                                    <h6>
-                                        <img
-                                            src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"
-                                            alt="list arrow icon"
-                                            class="me-2 pe-1 scaleX-n1-rtl" />
-                                        {{ $item->keuntungan_1}}
-                                    </h6>
-                                </li>
-                                <li>
-                                    <h6>
-                                        <img
-                                            src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"
-                                            alt="list arrow icon"
-                                            class="me-2 pe-1 scaleX-n1-rtl" />
-                                            {{ $item->keuntungan_2}}
-                                    </h6>
-                                </li>
-                                <li>
-                                    <h6>
-                                        <img
-                                            src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"
-                                            alt="list arrow icon"
-                                            class="me-2 pe-1 scaleX-n1-rtl" />
-                                            {{ $item->keuntungan_3}}
-                                    </h6>
-                                </li>
-                                <li>
-                                    <h6>
-                                        <img
-                                            src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"
-                                            alt="list arrow icon"
-                                            class="me-2 pe-1 scaleX-n1-rtl" />
-                                            {{ $item->keuntungan_4}}
-                                    </h6>
-                                </li>
-                                <li>
-                                    <h6>
-                                        <img
-                                            src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"
-                                            alt="list arrow icon"
-                                            class="me-2 pe-1 scaleX-n1-rtl" />
-                                            {{ $item->keuntungan_5}}
-                                    </h6>
-                                </li>
-                            </ul>
-                            <hr />
-                            {{-- <div class="d-flex justify-content-between align-items-center flex-wrap">
-                                <div class="me-1">
-                                    <h6 class="mb-1">Basic Support</h6>
-                                    <p class="small mb-0">Only Email</p>
-                                </div>
-                                <span class="badge bg-label-primary rounded-pill">AVG. Time: 24h</span>
-                            </div> --}}
-                            <div class="text-center mt-4 pt-2">
-                                <a href="{{ route('payment.show',$item->id)}}" class="btn btn-outline-primary w-100">Mulai Langganan</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
+{{--                @foreach ($langganan as $item)--}}
+{{--                <div class="col-xl-4 col-lg-6">--}}
+{{--                    <div class="card shadow-none">--}}
+{{--                        <div class="card-header border-0">--}}
+{{--                            <h3 class="mb-2 pb-1">{{ $item->nama_langganan}}</h3>--}}
+{{--                            <div class="d-flex align-items-center">--}}
+{{--                                <h5 class="d-flex mb-0"><sup class="h5 mt-3">Rp.</sup><span class="display-5 fw-bold">{{ number_format($item->harga, 0, ',', '.') }}</span></h5>--}}
+{{--                                <div class="ms-2 ps-1">--}}
+{{--                                    <h6 class="mb-1">/ {{ $item->lama_langganan}}</h6>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <img src="{{ asset('asset') }}/img/front-pages/icons/smiling-icon.png" alt="smiling icon" />--}}
+{{--                        </div>--}}
+{{--                        <div class="card-body">--}}
+{{--                            <ul class="list-unstyled">--}}
+{{--                                <li>--}}
+{{--                                    <h6>--}}
+{{--                                        <img--}}
+{{--                                            src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"--}}
+{{--                                            alt="list arrow icon"--}}
+{{--                                            class="me-2 pe-1 scaleX-n1-rtl" />--}}
+{{--                                        {{ $item->keuntungan_1}}--}}
+{{--                                    </h6>--}}
+{{--                                </li>--}}
+{{--                                <li>--}}
+{{--                                    <h6>--}}
+{{--                                        <img--}}
+{{--                                            src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"--}}
+{{--                                            alt="list arrow icon"--}}
+{{--                                            class="me-2 pe-1 scaleX-n1-rtl" />--}}
+{{--                                            {{ $item->keuntungan_2}}--}}
+{{--                                    </h6>--}}
+{{--                                </li>--}}
+{{--                                <li>--}}
+{{--                                    <h6>--}}
+{{--                                        <img--}}
+{{--                                            src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"--}}
+{{--                                            alt="list arrow icon"--}}
+{{--                                            class="me-2 pe-1 scaleX-n1-rtl" />--}}
+{{--                                            {{ $item->keuntungan_3}}--}}
+{{--                                    </h6>--}}
+{{--                                </li>--}}
+{{--                                <li>--}}
+{{--                                    <h6>--}}
+{{--                                        <img--}}
+{{--                                            src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"--}}
+{{--                                            alt="list arrow icon"--}}
+{{--                                            class="me-2 pe-1 scaleX-n1-rtl" />--}}
+{{--                                            {{ $item->keuntungan_4}}--}}
+{{--                                    </h6>--}}
+{{--                                </li>--}}
+{{--                                <li>--}}
+{{--                                    <h6>--}}
+{{--                                        <img--}}
+{{--                                            src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"--}}
+{{--                                            alt="list arrow icon"--}}
+{{--                                            class="me-2 pe-1 scaleX-n1-rtl" />--}}
+{{--                                            {{ $item->keuntungan_5}}--}}
+{{--                                    </h6>--}}
+{{--                                </li>--}}
+{{--                            </ul>--}}
+{{--                            <hr />--}}
+{{--                            --}}{{-- <div class="d-flex justify-content-between align-items-center flex-wrap">--}}
+{{--                                <div class="me-1">--}}
+{{--                                    <h6 class="mb-1">Basic Support</h6>--}}
+{{--                                    <p class="small mb-0">Only Email</p>--}}
+{{--                                </div>--}}
+{{--                                <span class="badge bg-label-primary rounded-pill">AVG. Time: 24h</span>--}}
+{{--                            </div> --}}
+{{--                            <div class="text-center mt-4 pt-2">--}}
+{{--                                <a href="{{ route('payment.show',$item->id)}}" class="btn btn-outline-primary w-100">Mulai Langganan</a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                @endforeach--}}
             </div>
         </div>
     </section>
