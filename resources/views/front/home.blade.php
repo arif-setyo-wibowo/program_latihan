@@ -49,17 +49,20 @@
                 <div class="d-flex justify-content-md-end align-items-center gap-3 flex-wrap">
                     <select id="select2_course_select" class="select2 form-select" data-placeholder="Cabor">
                         <option value="">Semua Cabang Olahraga</option>
-                        <option value="all courses">Sepak Bola</option>
+                        <option value="All">Semua Cabang Olahraga</option>
+                        @foreach($cabor as $c)
+                            <option value="{{ $c->nama_cabor }}">{{ $c->nama_cabor }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
             <div class="card-body">
                 <div class="row gy-4 mb-4">
-                    @for($i = 0; $i < 12; $i++)
+                    @foreach($materi as $m)
                         <div class="col-sm-6 col-md-4 col-lg-3">
                             <div class="card p-2 shadow-none border">
                                 <div class="rounded-2 text-center mb-3">
-                                    <a href="{{ url('course') }}"
+                                    <a href="{{ route('course', $m->id) }}"
                                     ><img
                                             class="img-fluid"
                                             src="{{ asset('asset') }}/img/pages/app-academy-tutor-1.png"
@@ -67,23 +70,21 @@
                                         /></a>
                                 </div>
                                 <div class="card-body p-3 pt-2">
-                                    <a href="{{ url('course') }}" class="h5">Sepak Bola</a>
-                                    <p class="mt-2">Optimalkan keterampilan sepak bola anda dengan program latihan intensif.</p>
-                                    <p class="d-flex align-items-center">
-                                        <i class="mdi mdi-page-layout-sidebar-right me-2"></i>4 program
-                                    </p>
+                                    <a href="{{ route('course', $m->id) }}" class="h5">{{ $m->cabor->nama_cabor }} <span class="mdi mdi-menu-right"></span> {{ $m->kategori->nama_kategori }}</a>
+                                    <p class="mt-2">{{ Str::limit(strip_tags($m->isi), 50) }}</p>
+
                                     <div
                                         class="d-flex flex-column flex-md-row gap-3 text-nowrap flex-wrap flex-md-nowrap flex-lg-wrap flex-xxl-nowrap">
                                         <a
                                             class="w-100 btn btn-outline-primary d-flex align-items-center"
-                                            href="{{ url('course') }}">
+                                            href="{{ route('course', $m->id) }}">
                                             <span class="me-1">Lihat</span><i class="mdi mdi-arrow-right lh-1 scaleX-n1-rtl"></i>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
                 </div>
                 <nav aria-label="Page navigation" class="d-flex align-items-center justify-content-center">
                     <ul class="pagination">
@@ -120,5 +121,18 @@
 @endsection
 
 @section('page-script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            $('#select2_course_select').on('change', function() {
+                window.location.href = '?cabor=' + $(this).val();
+            });
+            document.getElementById('searchButton').addEventListener('click', function() {
+                var searchQuery = document.getElementById('searchInput').value;
+                if (searchQuery.trim() !== '') {
+                    window.location.href = '?search=' + encodeURIComponent(searchQuery);
+                }
+            });
+        });
+    </script>
     <script src="{{ asset('asset') }}/js/app-academy-course.js"></script>
 @endsection
