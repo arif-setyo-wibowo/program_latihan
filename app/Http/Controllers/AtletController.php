@@ -14,7 +14,11 @@ class AtletController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'title' => 'Atlet',
+            'atlet' => Atlet::all()
+        ];
+        return view('admin.atlet.index',$data);
     }
 
     /**

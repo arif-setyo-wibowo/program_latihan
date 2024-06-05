@@ -15,7 +15,16 @@ return new class extends Migration
     {
         Schema::create('atlets', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('alamat');
+            $table->string('email');
+            $table->unsignedBigInteger('idlangganan');
+            $table->string('no_telp');
+            $table->string('bukti_tf');
+            $table->string('status')->nullable();
             $table->timestamps();
+
+            $table->foreign('idlangganan')->references('id')->on('langganans')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 

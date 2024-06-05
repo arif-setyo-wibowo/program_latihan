@@ -113,11 +113,17 @@
                 <div>Materi</div>
               </a>
             </li>
-            <li class="menu-item ">
-                <a href="" class="menu-link">
+            <li class="menu-item {{ request()->routeIs('atlet.index') ? 'active' : '' }}">
+                <a href="{{ route('atlet.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi  mdi-account-supervisor-outline"></i>
                 <div>Atlet</div>
               </a>
+            </li>
+            <li class="menu-item">
+                <a href="" class="menu-link">
+                    <i class="menu-icon tf-icons mdi  mdi-account-supervisor-outline"></i>
+                    <div>Atlet Langganan</div>
+                </a>
             </li>
             <li class="menu-item">
                 <a href="" class="menu-link">
@@ -180,7 +186,7 @@
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="auth-login-cover.html" target="_blank">
+                      <a class="dropdown-item" href="{{ route('admin.logout')}}">
                         <i class="mdi mdi-logout me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>
