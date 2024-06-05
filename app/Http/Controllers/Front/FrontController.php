@@ -6,13 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Cabor;
 use App\Models\Kategori;
 use App\Models\Materi;
+use App\Models\Langganan;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
     public function index()
     {
-        return view('front/landing');
+        $data = [
+            'title' => 'Program Atlet',
+            'langganan' => Langganan::all()
+        ];
+        return view('front/landing',$data);
     }
 
     public function home(Request $request)

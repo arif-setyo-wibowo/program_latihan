@@ -52,41 +52,38 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Jenis Olahrga</th>
-                            <th>Kategori Latihan</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>No Telp</th>
+                            <th>Langganan</th>
+                            <th>Harga</th>
+                            <th>Bukti TF</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($kategori as $item)
+                        @foreach ($atlet as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->cabor->nama_cabor }}</td>
-                            <td>{{ $item->nama_kategori }}</td>
+                            <td>{{ $item->nama }}</td>
+                            <td>{{ $item->email }}</td>
+                            <td>{{ $item->no_telp }}</td>
+                            <td >{{ $item->langganan->nama_langganan }}</td>
+                            <td>Rp. {{ number_format($item->langganan->harga,0, ',', '.')  }}</td>
+                            <td><img src="{{ asset('uploads/' . $item->bukti_tf) }}"  style="width:120px; height:120px;" alt=""></td>
                             <td>
-                                <a href="{{ route('kategori.edit',$item->id)}}" class="btn btn-info btn-sm">
-                                    <i class="fas fa-pencil-alt"></i>
-                                    Edit
+                                <a href="{{ route('atlet.show',$item->id)}}" class="btn btn-info btn-sm">
+                                    <span class="mdi mdi-information-slab-circle-outline"></span> Detail
                                 </a>
-                                <form action="{{ route('kategori.destroy',$item->id)}}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Gambar?')">
-                                        <i class="fas fa-trash"></i> Delete
-                                    </button>
-                                </form>
                             </td>
                         </tr>
-                        @endforeach --}}
-
+                        @endforeach
                     </tbody>
                 </table>
             </div>
           </div>
         </div>
       </div>
-
-
 </div>
   <!-- / Content -->
 @endsection
