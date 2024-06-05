@@ -73,7 +73,7 @@ class KategoriController extends Controller
         $data = [
             'title' => 'Edit Kategori',
             'olahraga' => Cabor::all(),
-            'kategori' => Kategori::find($id)->with("cabor")->first()
+            'kategori' => Kategori::find($id)->load('cabor')
         ];
 
         return view('admin.kategori.edit',$data);

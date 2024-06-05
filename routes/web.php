@@ -7,6 +7,7 @@ use App\Http\Controllers\CaborController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\AtletController;
+use App\Http\Controllers\LanggananController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,10 +30,21 @@ Route::controller(LoginController::class)->prefix('admin/login')->group(function
     Route::post('/', 'postlogin')->name('postlogin');
 });
 
+
+Route::controller(LoginController::class)->prefix('admin/login')->group(function () {
+    Route::get('/', 'index')->name('login');
+    Route::post('/', 'postlogin')->name('postlogin');
+});
+
 Route::get('/admin/kategorites/{id}', [MateriController::class, 'fetchCategories']);
 
 
 Route::middleware('petugas')->prefix('/admin')->group(function () {
+
+    Route::controller(DashboardController::class)->group(function () {
+        Route::get('/', 'index')->name('dashboard.index');
+    });
+
 
     Route::resource('dashboard', DashboardController::class);
 
@@ -44,17 +56,17 @@ Route::middleware('petugas')->prefix('/admin')->group(function () {
 
     Route::resource('atlet', AtletController::class);
 
-
+    Route::resource('langganan', LanggananController::class);
 
     Route::controller(LoginController::class)->prefix('/logout')->group(function () {
         Route::get('/', 'logout')->name('admin.logout');
     });
 
-    Route::controller(PetugasController::class)->prefix('/petugas')->group(function () {
-        Route::get('/', 'index')->name('admin.petugas');
-        Route::post('/', 'storeUpdate')->name('petugas.store.update');
-        Route::get('/delete', 'destroy')->name('delete.petugas');
-    });
+    // Route::controller(PetugasController::class)->prefix('/petugas')->group(function () {
+    //     Route::get('/', 'index')->name('admin.petugas');
+    //     Route::post('/', 'storeUpdate')->name('petugas.store.update');
+    //     Route::get('/delete', 'destroy')->name('delete.petugas');
+    // });
 
 
 
