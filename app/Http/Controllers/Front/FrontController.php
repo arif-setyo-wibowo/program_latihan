@@ -8,8 +8,11 @@ use App\Models\Kategori;
 use App\Models\Materi;
 use App\Models\Langganan;
 use App\Models\Atlet;
+use App\Models\pembelian;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class FrontController extends Controller
 {
@@ -26,6 +29,7 @@ class FrontController extends Controller
     {
         $cabor = Cabor::all();
 
+
         //filter cabor
         $param = $request->query('cabor');
         if ($param == null){
@@ -40,7 +44,38 @@ class FrontController extends Controller
             }
         }
 
-        return view('front/home', compact('materi', 'cabor'));
+        $email = session('user.email');
+
+        $atlet = DB::table('atlet')
+                ->where('email', $email)
+                ->where('status', 1)
+                ->first();
+
+        if ($atlet) {
+                $pembelian = Pembelian::where('idlangganan', $atlet->id)->first();
+
+                if ($pembelian) {
+                    // Ambil tanggal sekarang
+                    $now = Carbon::now();
+
+                    // Cek status langganan
+                    if ($pembelian->status_langganan == 1) {
+                        if ($now->lte($pembelian->tanggal_akhir)) {
+                            return view('front/home', compact('materi', 'cabor'));
+                        } else {
+                            $pembelian->status_langganan = 0;
+                            $pembelian->save();
+
+                            DB::table('atlet')
+                                ->where('id', $atlet->id)
+                                ->update(['status' => 3]);
+                            return redirect()->route('logout.front')->with('message', 'Subscription Anda sudah habis.');
+                        }
+                    }
+                }
+        }
+
+        return redirect()->route('login.front')->with('message', 'Subscription Anda sudah habis.');
     }
 
     public function course($id)

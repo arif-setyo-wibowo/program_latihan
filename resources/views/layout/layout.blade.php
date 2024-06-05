@@ -119,12 +119,12 @@
                 <div>Atlet</div>
               </a>
             </li>
-            {{-- <li class="menu-item">
-                <a href="" class="menu-link">
+            <li class="menu-item {{ request()->routeIs('pembelian.index') ? 'active' : '' }}">
+                <a href="{{ route('pembelian.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons mdi  mdi-account-supervisor-outline"></i>
                     <div>Langganan</div>
                 </a>
-            </li> --}}
+            </li>
             <li class="menu-item  {{ request()->routeIs('langganan.index') ? 'active' : '' }}">
                 <a href="{{ route('langganan.index')}}" class="menu-link">
                   <i class="menu-icon tf-icons mdi mdi-run"></i>
@@ -176,7 +176,7 @@
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-medium d-block">John Doe</span>
+                            <span class="fw-medium d-block">{{ session('user.nama')}}</span>
                             <small class="text-muted">Admin</small>
                           </div>
                         </div>
@@ -223,8 +223,8 @@
                     <script>
                       document.write(new Date().getFullYear());
                     </script>
-                    , made with <span class="text-danger"><i class="tf-icons mdi mdi-heart"></i></span> by
-                    <a target="_blank" class="footer-link fw-medium">itboy</a>
+                    , made with <span class="text-danger"><i class="tf-icons mdi mdi-heart"></i></span>
+                    <a target="_blank" class="footer-link fw-medium"></a>
                   </div>
 
                 </div>

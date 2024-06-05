@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pembelian;
 use Illuminate\Http\Request;
 
 class PembelianController extends Controller
@@ -13,7 +14,13 @@ class PembelianController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'title' => 'Pembelian',
+            'pembelian' => Pembelian::with("langganan","atlet")->where('status_langganan','1')->get()
+        ];
+        
+
+        return view('admin.atlet.cek',$data);
     }
 
     /**

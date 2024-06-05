@@ -43,7 +43,7 @@ class PaymentController extends Controller
         $atlet = new Atlet;
 
         $request->validate([
-            'bukti_tf' => 'image|mimes:png,jpg,jpeg',
+            'bukti_tf' => 'required|image|mimes:png,jpg,jpeg',
         ]);
 
         if ($request->file('bukti_tf')) {

@@ -8,6 +8,7 @@ use App\Models\Pembelian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use App\Mail\AccountCreated;
 
 class AtletController extends Controller
@@ -130,12 +131,14 @@ class AtletController extends Controller
             //     Mail::to($atlet->email)->send(new AccountCreated($item));
 
             // }else{
-                Mail::send('email.purchase_success', ['atlet' => $atlet], function ($message) use ($atlet) {
-                    $message->to($atlet->email)->subject('Pembelian Langganan Berhasil');
-                });
+            Mail::send('email.purchase_success', ['atlet' => $atlet], function ($message) use ($atlet) {
+                $message->to($atlet->email)->subject('Pembelian Langganan Berhasil');
+            });
 
             // }
 
+
+            Session::flash('msg', 'Berhasil Mengubah Data. Dan mengirim email');
             return redirect()->route('atlet.index');
 
 
@@ -143,11 +146,14 @@ class AtletController extends Controller
             $atlet = Atlet::find($request->atlet);
             $atlet->status = '2';
             $atlet->save();
+
+
+            Session::flash('msg', 'Berhasil Mengubah Data');
+            return redirect()->route('atlet.index');
         }
 
 
     }
-
     /**
      * Remove the specified resource from storage.
      *
