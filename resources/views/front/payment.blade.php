@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Payment Page - Front Pages | Materialize - Material Design HTML Admin Template</title>
+    <title>Halaman Pembayaran</title>
 
     <meta name="description" content="" />
 
@@ -178,28 +178,51 @@
 <section class="section-py bg-body first-section-pt">
     <div class="container">
         <div class="card px-3">
+            <?php if (session()->has('msg')):?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert" id="autoDismissAlert" style="margin:5px;">
+                {{ session('msg') }}
+            </div>
+            <?php endif ?>
+
+            @if(Session::has('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" id="autoDismissAlert"style="margin:5px;">
+                    {{ Session::get('error') }}
+                </div>
+            @endif
+
             <div class="row">
+
+
+              @if ($errors->any())
+                <div id="toast-container" class="toast-top-right">
+                  <div class="toast toast-error" aria-live="assertive" style="display: block;">
+                    <div class="toast-message">
+                          @foreach ($errors->all() as $error)
+                          {{ $error }} </i><br>
+                      @endforeach
+                    </div>
+                  </div>
+                </div>
+              @endif
                 <div class="col-lg-7 card-body border-end">
                     <h4 class="mb-2">Pembayaran</h4>
                     <p class="mb-4">
                         Transfer sejumlah uang ke salah satu rekening dibawah, kemudian unggah bukti transfer pada kolom yang disediakan:
                     </p>
                     <div id="form-credit-card">
-                        <form>
+
                             <div class="row g-4">
                                 <div class="col-6">
                                     <div class="input-group input-group-merge">
                                         <div class="form-floating form-floating-outline">
                                             <input readonly
                                                 type="text"
-                                                id="billings-card-num"
-                                                class="form-control billing-card-mask"
-                                                value="4541 2541 2547 2577"
-                                                aria-describedby="paymentCard"/>
+                                                class="form-control"
+                                                value="643501015308531"/>
                                             <label for="billings-card-num">Nomor Rekening</label>
                                         </div>
-                                        <span class="input-group-text cursor-pointer p-1" id="paymentCard"
-                                        ><span class="card-type w-px-50"></span
+                                        <span class="input-group-text cursor-pointer p-1"
+                                        ><span class="w-px-50"><b>BRI</b></span
                                             ></span>
                                     </div>
                                 </div>
@@ -207,100 +230,64 @@
                                     <div class="input-group input-group-merge">
                                         <div class="form-floating form-floating-outline">
                                             <input readonly
-                                                   type="text"
-                                                   id="billings-card-num"
-                                                   class="form-control billing-card-mask"
-                                                   value="4541 2541 2547 2577"
-                                                   aria-describedby="paymentCard"/>
-                                            <label for="billings-card-num">Nomor Rekening</label>
+                                                type="text"
+                                                class="form-control"
+                                                value="IMELDA ZASKIA MAWARNI"/>
+                                            <label for="billings-card-num">Nama Pemilik</label>
                                         </div>
-                                        <span class="input-group-text cursor-pointer p-1" id="paymentCard"
-                                        ><span class="card-type w-px-50"></span
-                                            ></span>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="input-group input-group-merge">
-                                        <div class="form-floating form-floating-outline">
-                                            <input readonly
-                                                   type="text"
-                                                   id="billings-card-num"
-                                                   class="form-control billing-card-mask"
-                                                   value="4541 2541 2547 2577"
-                                                   aria-describedby="paymentCard"/>
-                                            <label for="billings-card-num">Nomor Rekening</label>
-                                        </div>
-                                        <span class="input-group-text cursor-pointer p-1" id="paymentCard"
-                                        ><span class="card-type w-px-50"></span
-                                            ></span>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="input-group input-group-merge">
-                                        <div class="form-floating form-floating-outline">
-                                            <input readonly
-                                                   type="text"
-                                                   id="billings-card-num"
-                                                   class="form-control billing-card-mask"
-                                                   value="4541 2541 2547 2577"
-                                                   aria-describedby="paymentCard"/>
-                                            <label for="billings-card-num">Nomor Rekening</label>
-                                        </div>
-                                        <span class="input-group-text cursor-pointer p-1" id="paymentCard"
-                                        ><span class="card-type w-px-50"></span
-                                            ></span>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+
                     </div>
 
+                    <form action="{{ route('payment.store')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
                     <h4 class="mt-4 mb-4">Informasi Pengguna</h4>
-                    <form>
+
                         <div class="row g-4">
                             <div class="col-md-6">
                                 <div class="form-floating form-floating-outline">
-                                    <input type="text" class="form-control" id="billings-name" placeholder="John Doe" />
+                                    <input type="text" class="form-control" id="billings-name" name="nama" placeholder="Nama Lengkap" />
                                     <label for="billings-name">Nama Lengkap</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating form-floating-outline">
-                                    <input type="text" class="form-control" id="billings-email" placeholder="john.doe@gmail.com" />
+                                    <input type="text" class="form-control" id="billings-email" name="email" placeholder="Email" />
                                     <label for="billings-email">Email</label>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-floating form-floating-outline">
-                                    <input type="text" class="form-control" id="billings-address" placeholder="Jl. Purorekso" />
+                                    <input type="text" class="form-control" id="billings-address" name="alamat" placeholder="Jl. Purorekso" />
                                     <label for="billings-address">Alamat</label>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mt-5">
                                 <div class="form-floating form-floating-outline">
-                                    <input type="text" class="form-control" id="billings-telp" placeholder="082143123221" />
+                                    <input type="text" class="form-control" id="billings-telp" name="telp" placeholder="082143123221" />
                                     <label for="billings-telp">Nomor Telepon</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-floating form-floating-outline">
-                                    <input type="file" class="form-control" id="billings-bukti" />
-                                    <label for="billings-bukti">Bukti Transfer</label>
-                                </div>
+                                <label for="basic-default-fullname">Bukti Transfer</label>
+                                <input type="file" class="form-control" id="basic-default-fullname" name="bukti_tf" />
                             </div>
                         </div>
-                    </form>
+
                 </div>
                 <div class="col-lg-5 card-body">
                     <h4 class="mb-2">Ringkasan</h4>
                     <div class="bg-lighter p-4 rounded mt-4">
-                        <p>A simple start for everyone</p>
                         <div class="d-flex align-items-center">
-                            <h1 class="text-heading display-3">$59.99</h1>
-                            <sub>/month</sub>
+
+                            <input type="hidden" class="form-control" name="langganan" value="{{ $langganan->id}}"/>
+                            <h1 class="text-heading display-3">Rp. {{ number_format($langganan->harga, 0, ',', '.') }}</h1>
+                            <sub>/ {{ $langganan->lama_langganan}}</sub>
                         </div>
                         <div class="d-grid">
-                            <a href="{{ url('landing') }}" data-bs-target="#pricingModal" class="btn btn-outline-primary text-primary"
+                            <a href="{{ route('landing') }}" data-bs-target="#pricingModal" class="btn btn-outline-primary text-primary"
                             >Ubah Skema</a
                             >
                         </div>
@@ -308,27 +295,36 @@
                     <div>
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <p class="mb-0">Subtotal</p>
-                            <h6 class="mb-0">$85.99</h6>
+                            <h6 class="mb-0">Rp. {{ number_format($langganan->harga, 0, ',', '.') }}</h6>
                         </div>
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <p class="mb-0">Tax</p>
-                            <h6 class="mb-0">$4.99</h6>
+                            <h6 class="mb-0">Rp. {{ number_format($langganan->harga * 0.11, 0, ',', '.') }}</h6>
                         </div>
                         <hr />
                         <div class="d-flex justify-content-between align-items-center mt-3 pb-1">
                             <p class="mb-0">Total</p>
-                            <h6 class="mb-0">$90.98</h6>
+                            <h6 class="mb-0">Rp. {{ number_format($total,0, ',', '.') }}</h6>
                         </div>
                         <div class="d-grid mt-3">
-                            <button class="btn btn-success">
-                                <span class="me-2">Saya telah membayar</span>
-                                <i class="mdi mdi-arrow-right scaleX-n1-rtl"></i>
-                            </button>
+                            @if (session()->has('success'))
+                                <a href="{{ route('landing') }}" class="btn btn-success">
+                                    <span class="me-2">Kembali</span>
+                                    <i class="mdi mdi-arrow-right scaleX-n1-rtl"></i>
+                                </a>
+                            @else
+                                <button type="submit" class="btn btn-success">
+                                    <span class="me-2">Saya telah membayar</span>
+                                    <i class="mdi mdi-arrow-right scaleX-n1-rtl"></i>
+                                </button>
+                            @endif
+
                         </div>
 
                         <p class="mt-4 pt-2">
                             Setelah anda selesai membayar sejumlah total tagihan, tim kami akan melakukan verifikasi, mohon cek berkala email anda.
                         </p>
+                    </form>
                     </div>
                 </div>
             </div>

@@ -108,7 +108,7 @@ class MateriController extends Controller
             'title' => 'Edit Materi',
             'olahraga' => Cabor::all(),
             'kategori' => Kategori::all(),
-            'materi' => Materi::find($id)->with("cabor","kategori","petugas")->first()
+            'materi' => Materi::find($id)->load("cabor","kategori","petugas")
         ];
 
         return view('admin.materi.edit',$data);

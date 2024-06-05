@@ -323,93 +323,82 @@
             </p>
             <div class="row gy-4 pt-lg-3">
                 <!-- Favourite Plan: Start -->
-                @for($i=0; $i<=5; $i++)
-                    <div class="col-xl-4 col-lg-6">
-                        <div class="card shadow-none">
-                            <div class="card-header border-0">
-                                <h3 class="mb-2 pb-1">Basic Plan</h3>
-                                <div class="d-flex align-items-center">
-                                    <h5 class="d-flex mb-0"><sup class="h5 mt-3">Rp.</sup><span class="display-3 fw-bold">20.000</span></h5>
-                                    <div class="ms-2 ps-1">
-                                        <h6 class="mb-1">Per month</h6>
-                                        <p class="small mb-0">10% off for yearly subscription</p>
-                                    </div>
+                @foreach ($langganan as $item)
+                <div class="col-xl-4 col-lg-6">
+                    <div class="card shadow-none">
+                        <div class="card-header border-0">
+                            <h3 class="mb-2 pb-1">{{ $item->nama_langganan}}</h3>
+                            <div class="d-flex align-items-center">
+                                <h5 class="d-flex mb-0"><sup class="h5 mt-3">Rp.</sup><span class="display-5 fw-bold">{{ number_format($item->harga, 0, ',', '.') }}</span></h5>
+                                <div class="ms-2 ps-1">
+                                    <h6 class="mb-1">/ {{ $item->lama_langganan}}</h6>
                                 </div>
-                                <img src="{{ asset('asset') }}/img/front-pages/icons/smiling-icon.png" alt="smiling icon" />
                             </div>
-                            <div class="card-body">
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <h5>
-                                            <img
-                                                src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"
-                                                alt="list arrow icon"
-                                                class="me-2 pe-1 scaleX-n1-rtl" />
-                                            Timeline
-                                        </h5>
-                                    </li>
-                                    <li>
-                                        <h5>
-                                            <img
-                                                src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"
-                                                alt="list arrow icon"
-                                                class="me-2 pe-1 scaleX-n1-rtl" />
-                                            Basic search
-                                        </h5>
-                                    </li>
-                                    <li>
-                                        <h5>
-                                            <img
-                                                src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"
-                                                alt="list arrow icon"
-                                                class="me-2 pe-1 scaleX-n1-rtl" />
-                                            Live chat widget
-                                        </h5>
-                                    </li>
-                                    <li>
-                                        <h5>
-                                            <img
-                                                src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"
-                                                alt="list arrow icon"
-                                                class="me-2 pe-1 scaleX-n1-rtl" />
-                                            Email marketing
-                                        </h5>
-                                    </li>
-                                    <li>
-                                        <h5>
-                                            <img
-                                                src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"
-                                                alt="list arrow icon"
-                                                class="me-2 pe-1 scaleX-n1-rtl" />
-                                            Custom Forms
-                                        </h5>
-                                    </li>
-                                    <li>
-                                        <h5>
-                                            <img
-                                                src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"
-                                                alt="list arrow icon"
-                                                class="me-2 pe-1 scaleX-n1-rtl" />
-                                            Traffic analytics
-                                        </h5>
-                                    </li>
-                                </ul>
-                                <hr />
-                                <div class="d-flex justify-content-between align-items-center flex-wrap">
-                                    <div class="me-1">
-                                        <h6 class="mb-1">Basic Support</h6>
-                                        <p class="small mb-0">Only Email</p>
-                                    </div>
-                                    <span class="badge bg-label-primary rounded-pill">AVG. Time: 24h</span>
+                            <img src="{{ asset('asset') }}/img/front-pages/icons/smiling-icon.png" alt="smiling icon" />
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <h6>
+                                        <img
+                                            src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"
+                                            alt="list arrow icon"
+                                            class="me-2 pe-1 scaleX-n1-rtl" />
+                                        {{ $item->keuntungan_1}}
+                                    </h6>
+                                </li>
+                                <li>
+                                    <h6>
+                                        <img
+                                            src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"
+                                            alt="list arrow icon"
+                                            class="me-2 pe-1 scaleX-n1-rtl" />
+                                            {{ $item->keuntungan_2}}
+                                    </h6>
+                                </li>
+                                <li>
+                                    <h6>
+                                        <img
+                                            src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"
+                                            alt="list arrow icon"
+                                            class="me-2 pe-1 scaleX-n1-rtl" />
+                                            {{ $item->keuntungan_3}}
+                                    </h6>
+                                </li>
+                                <li>
+                                    <h6>
+                                        <img
+                                            src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"
+                                            alt="list arrow icon"
+                                            class="me-2 pe-1 scaleX-n1-rtl" />
+                                            {{ $item->keuntungan_4}}
+                                    </h6>
+                                </li>
+                                <li>
+                                    <h6>
+                                        <img
+                                            src="{{ asset('asset') }}/img/front-pages/icons/list-arrow-icon.png"
+                                            alt="list arrow icon"
+                                            class="me-2 pe-1 scaleX-n1-rtl" />
+                                            {{ $item->keuntungan_5}}
+                                    </h6>
+                                </li>
+                            </ul>
+                            <hr />
+                            {{-- <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="me-1">
+                                    <h6 class="mb-1">Basic Support</h6>
+                                    <p class="small mb-0">Only Email</p>
                                 </div>
-                                <div class="text-center mt-4 pt-2">
-                                    <a href="payment-page.html" class="btn btn-outline-primary w-100">Get Started</a>
-                                </div>
+                                <span class="badge bg-label-primary rounded-pill">AVG. Time: 24h</span>
+                            </div> --}}
+                            <div class="text-center mt-4 pt-2">
+                                <a href="{{ route('payment.show',$item->id)}}" class="btn btn-outline-primary w-100">Mulai Langganan</a>
                             </div>
                         </div>
                     </div>
-                @endfor
-                <!-- Favourite Plan: End -->
+                </div>
+                @endforeach
             </div>
         </div>
     </section>

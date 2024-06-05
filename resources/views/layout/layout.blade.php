@@ -122,9 +122,15 @@
             <li class="menu-item">
                 <a href="" class="menu-link">
                     <i class="menu-icon tf-icons mdi  mdi-account-supervisor-outline"></i>
-                    <div>Atlet Langganan</div>
+                    <div>Langganan</div>
                 </a>
             </li>
+            <li class="menu-item  {{ request()->routeIs('langganan.index') ? 'active' : '' }}">
+                <a href="{{ route('langganan.index')}}" class="menu-link">
+                  <i class="menu-icon tf-icons mdi mdi-run"></i>
+                  <div>Harga Langganan</div>
+                </a>
+              </li>
             <li class="menu-item">
                 <a href="" class="menu-link">
                   <i class="menu-icon tf-icons mdi mdi-account"></i>
