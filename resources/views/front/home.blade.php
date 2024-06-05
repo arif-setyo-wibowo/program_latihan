@@ -61,14 +61,23 @@
                                     <a href="{{ route('course', $m->id) }}"
                                     ><img
                                             class="img-fluid"
-                                            src="{{ asset('asset') }}/img/pages/app-academy-tutor-1.png"
+                                            src="{{ asset('uploads/'.$m->foto) }}"
                                             alt="tutor image 1"
                                         /></a>
                                 </div>
                                 <div class="card-body p-3 pt-2">
-                                    <a href="{{ route('course', $m->id) }}" class="h5">{{ $m->cabor->nama_cabor }} <span class="mdi mdi-menu-right"></span> {{ $m->kategori->nama_kategori }}</a>
-                                    <p class="mt-2">{{ Str::limit(strip_tags($m->isi), 50) }}</p>
-
+                                    <a href="{{ route('course', $m->id) }}" class="h5">{{ $m->judul }}</a>
+                                    <p class="mt-2 mb-n1">{{ Str::limit(strip_tags($m->isi), 50) }}</p>
+                                    <p class="d-flex align-items-center">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <i class="mdi mdi-shape me-2"></i>{{ $m->cabor->nama_cabor }}
+                                            </div>
+                                            <div class="col-6">
+                                                <i class="mdi mdi-dumbbell me-2"></i>{{ $m->kategori->nama_kategori }}
+                                            </div>
+                                        </div>
+                                    </p>
                                     <div
                                         class="d-flex flex-column flex-md-row gap-3 text-nowrap flex-wrap flex-md-nowrap flex-lg-wrap flex-xxl-nowrap">
                                         <a
@@ -84,31 +93,45 @@
                 </div>
                 <nav aria-label="Page navigation" class="d-flex align-items-center justify-content-center">
                     <ul class="pagination">
-                        <li class="page-item prev">
-                            <a class="page-link" href="javascript:void(0);"
-                            ><i class="tf-icon mdi mdi-chevron-left"></i
-                                ></a>
-                        </li>
-                        <li class="page-item active">
-                            <a class="page-link" href="javascript:void(0);">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0);">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0);">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0);">4</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0);">5</a>
-                        </li>
-                        <li class="page-item next">
-                            <a class="page-link" href="javascript:void(0);"
-                            ><i class="tf-icon mdi mdi-chevron-right"></i
-                                ></a>
-                        </li>
+                        @if ($materi->onFirstPage())
+                            <li class="page-item prev disabled">
+                                <a class="page-link" href="javascript:void(0);"
+                                ><i class="tf-icon mdi mdi-chevron-left"></i
+                                    ></a>
+                            </li>
+                        @else
+                            <li class="page-item prev">
+                                <a class="page-link" href="{{ $materi->previousPageUrl() }}"
+                                ><i class="tf-icon mdi mdi-chevron-left"></i
+                                    ></a>
+                            </li>
+                        @endif
+
+                        @foreach ($materi->links()->elements[0] as $page => $url)
+                            @if ($page == $materi->currentPage())
+                                <li class="page-item active">
+                                    <a class="page-link" href="javascript:void(0);">{{ $page }}</a>
+                                </li>
+                            @else
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                </li>
+                            @endif
+                        @endforeach
+
+                        @if ($materi->hasMorePages())
+                            <li class="page-item next">
+                                <a class="page-link" href="{{ $materi->nextPageUrl() }}"
+                                ><i class="tf-icon mdi mdi-chevron-right"></i
+                                    ></a>
+                            </li>
+                        @else
+                            <li class="page-item next disabled">
+                                <a class="page-link" href="javascript:void(0);"
+                                ><i class="tf-icon mdi mdi-chevron-right"></i
+                                    ></a>
+                            </li>
+                        @endif
                     </ul>
                 </nav>
             </div>

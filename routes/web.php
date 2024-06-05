@@ -30,10 +30,6 @@ Route::controller(FrontController::class)->group(function () {
 Route::controller(PaymentController::class)->group(function () {
     Route::get('/payment', 'index')->name('payment');
     Route::get('/payment/{id}', 'show')->name('payment.show');
-});
-Route::controller(PaymentController::class)->group(function () {
-    Route::get('/payment', 'index')->name('payment');
-    Route::get('/payment/{id}', 'show')->name('payment.show');
     Route::post('/payment-store', 'store')->name('payment.store');
 });
 
@@ -107,10 +103,6 @@ Route::get('/landing', function () {
 
 Route::get('/profile', function () {
     return view('front/profile');
-});
-
-Route::get('/course', function () {
-    return view('front/course');
 });
 
 

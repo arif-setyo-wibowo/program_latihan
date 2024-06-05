@@ -27,14 +27,14 @@ class FrontController extends Controller
         //filter cabor
         $param = $request->query('cabor');
         if ($param == null){
-            $materi = Materi::all();
+            $materi = Materi::paginate(16);
         }else{
             if($param == "All"){
-                $materi = Materi::all();
+                $materi = Materi::paginate(16);
             }else{
                 $materi = Materi::whereHas('cabor', function ($query) use ($param) {
                     $query->where('nama_cabor', $param);
-                })->get();
+                })->paginate(64);
             }
         }
 
@@ -43,10 +43,12 @@ class FrontController extends Controller
 
     public function course($id)
     {
-        $cabor = Cabor::all();
-        $kategori = Kategori::all();
-        $materi = Materi::find($id);
+        $id_cabor = Materi::find($id)->idcabor;
+        $kategori = Kategori::where('idcabor', $id_cabor)->get();
 
-        return view('front/course');
+        $materi = Materi::where('idcabor', $id_cabor)->get();
+        $materi_now = Materi::find($id);
+
+        return view('front/course', compact('kategori', 'materi', 'materi_now'));
     }
 }
