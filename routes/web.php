@@ -86,10 +86,6 @@ Route::get('/profile', function () {
     return view('front/profile');
 });
 
-Route::get('/course', function () {
-    return view('front/course');
-});
-
 Route::get('/payment', function () {
     return view('front/payment');
 });
