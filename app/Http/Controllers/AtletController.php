@@ -8,6 +8,7 @@ use App\Models\Pembelian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\AccountCreated;
 
 class AtletController extends Controller
 {
@@ -110,36 +111,38 @@ class AtletController extends Controller
             $pembelian->status_langganan = '1';
             $pembelian->save();
 
-            // Periksa apakah akun sudah ada berdasarkan alamat email
             $akun = AtletLogin::where('email', $atlet->email)->first();
+            $password = "12345678";
+            $akun = new AtletLogin;
+            $akun->email = $atlet->email;
+            $akun->password = Hash::make($password);
+            $akun->status = '1';
+            $akun->save();
 
-            if (!$akun) {
-                // Jika akun belum terdaftar, buat akun baru dan kirim email
-                $password = "12345678"; // Generate random password
-                $akun = new AtletLogin;
-                $akun->email = $atlet->email;
-                $akun->password = Hash::make($password); // Encrypt password using bcrypt
-                $akun->status = '1';
-                $akun->save();
+            // $urlLogin = route('login');
 
-                // Kirim email akun baru
-                Mail::send('email.account_created', ['password' => $password], function ($message) use ($atlet) {
-                    $message->to($atlet->email)->subject('Akun Baru Telah Dibuat');
+            //     $item=[
+            //         'password' =>  $password,
+            //         'url' => $urlLogin,
+            //         'email' => $atlet->email
+            //     ];
+
+            //     Mail::to($atlet->email)->send(new AccountCreated($item));
+
+            // }else{
+                Mail::send('email.purchase_success', ['atlet' => $atlet], function ($message) use ($atlet) {
+                    $message->to($atlet->email)->subject('Pembelian Langganan Berhasil');
                 });
 
-                // Kirim email akun baru dengan view lain (opsional)
-                Mail::to($atlet->email)->send(new AccountCreated($atlet->email, $password));
-            }
-
-            // Kirim email pembelian sukses
-            Mail::send('email.purchase_success', ['atlet' => $atlet], function ($message) use ($atlet) {
-                $message->to($atlet->email)->subject('Pembelian Langganan Berhasil');
-            });
+            // }
 
             return redirect()->route('atlet.index');
+
+
         } elseif ($action == 'tolak') {
-            // Logika untuk penolakan pembayaran
-            // Kamu dapat menambahkan logika di sini jika diperlukan
+            $atlet = Atlet::find($request->atlet);
+            $atlet->status = '2';
+            $atlet->save();
         }
 
 

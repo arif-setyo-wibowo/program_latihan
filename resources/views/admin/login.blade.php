@@ -71,13 +71,13 @@
               <a href="#" class="app-brand-link gap-2">
                 <span class="app-brand-logo demo">
                 </span>
-                <span class="app-brand-text demo text-heading fw-bold">Progran Atlet</span>
+                <span class="app-brand-text demo text-heading fw-bold">Program Atlet</span>
               </a>
             </div>
             <!-- /Logo -->
 
             <div class="card-body mt-2">
-                
+
                 @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     @foreach ($errors->all() as $error)
@@ -116,14 +116,14 @@
                   </div>
                 </div>
                 <div class="mb-3 d-flex justify-content-between">
-                  
+
                 </div>
                 <div class="mb-3">
                   <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                 </div>
               </form>
 
-             
+
               </div>
             </div>
           </div>

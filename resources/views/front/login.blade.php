@@ -3,17 +3,25 @@
     <div class="card-body mt-2">
         <h4 class="mb-2">Selamat Datang! 👋</h4>
         <p class="mb-4">Login untuk memulai berlatih dengan program kami</p>
+        @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    @foreach ($errors->all() as $error)
+                            <i class="bi bi-exclamation-octagon me-1"> {{ $error }} </i><br>
+                        @endforeach
+                    </div>
+                @endif
 
-        <form id="formAuthentication" class="mb-3" action="index.html" method="GET">
+        <form id="formAuthentication" class="mb-3" action="{{ route('post.login.front')}}" method="post">
+            @csrf
             <div class="form-floating form-floating-outline mb-3">
                 <input
                     type="text"
                     class="form-control"
                     id="email"
-                    name="email-username"
-                    placeholder="Masukkan email atau username"
+                    name="email"
+                    placeholder="Masukkan email"
                     autofocus />
-                <label for="email">Email atau Username</label>
+                <label for="email">Email</label>
             </div>
             <div class="mb-3">
                 <div class="form-password-toggle">
@@ -32,21 +40,21 @@
                     </div>
                 </div>
             </div>
-            <div class="mb-3 text-end">
+            {{-- <div class="mb-3 text-end">
                 <a href="{{ url('forgot') }}">
                     <span>Lupa Password?</span>
                 </a>
-            </div>
+            </div> --}}
             <div class="mb-3">
                 <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
             </div>
         </form>
 
-        <p class="text-center">
+        {{-- <p class="text-center">
             <span>Belum punya akun?</span>
             <a href="auth-register-basic.html">
                 <span>Berlangganan!</span>
             </a>
-        </p>
+        </p> --}}
     </div>
 @endsection

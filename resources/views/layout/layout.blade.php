@@ -119,20 +119,20 @@
                 <div>Atlet</div>
               </a>
             </li>
-            <li class="menu-item">
+            {{-- <li class="menu-item">
                 <a href="" class="menu-link">
                     <i class="menu-icon tf-icons mdi  mdi-account-supervisor-outline"></i>
                     <div>Langganan</div>
                 </a>
-            </li>
+            </li> --}}
             <li class="menu-item  {{ request()->routeIs('langganan.index') ? 'active' : '' }}">
                 <a href="{{ route('langganan.index')}}" class="menu-link">
                   <i class="menu-icon tf-icons mdi mdi-run"></i>
                   <div>Harga Langganan</div>
                 </a>
               </li>
-            <li class="menu-item">
-                <a href="" class="menu-link">
+            <li class="menu-item {{ request()->routeIs('petugas.index') ? 'active' : '' }}">
+                <a href="{{ route('petugas.index')}}" class="menu-link">
                   <i class="menu-icon tf-icons mdi mdi-account"></i>
                   <div>Petugas</div>
                 </a>

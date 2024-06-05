@@ -60,9 +60,10 @@ class MateriController extends Controller
             $materi->foto = $fotoName;
         }
 
+        $user_id = Session::get('user.id');
         $materi->idcabor = $request->idcabor;
         $materi->idkategori = $request->idkategori;
-        $materi->iduser = "1";
+        $materi->iduser = $user_id;
         $materi->judul = $request->judul;
         if($request->link == null){
             $link  = "-";

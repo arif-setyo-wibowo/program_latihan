@@ -21,58 +21,33 @@ class PetugasController extends Controller
             'title' => 'Petugas',
             'petugas' => Petugas::all()
         ];
-        return view('petugas',$data);
+        return view('admin.petugas.index',$data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function storeUpdate(Request $request){
-        if ($request->proses == 'Tambah') {
-            $request->validate([
-                'username' => 'unique:petugas',
-            ]);
-            $user = new Petugas;
-            $user->nama = $request->nama;
-            $user->username = $request->username;
-            $user->password = Hash::make($request->password);
-            $user->save();
-            Session::flash('msg', 'Berhasil Menambah Data User');
-            return redirect()->route('admin.petugas');
-        }elseif ($request->proses == 'Update') {
-            
-            $user = Petugas::find($request->id);
-
-            $request->validate([
-                'username'=> Rule::unique('petugas')->ignore($user->id)
-            ]);
-
-            if($request->password == null){
-                $password = $request->password_lama;
-            }else{
-                $password = Hash::make($request->password);
-            }
-    
-            if ($request->nama_user == null) {
-                session(['nama.admin' => $user->nama_user]);
-            }else{
-                session()->forget('nama.admin'); 
-                session(['nama.admin' => $request->nama_user]);
-            }
-
-            $user->nama = $request->nama;
-            $user->username = $request->username;
-            $user->password = $password;
-            $user->save();
-
-
-            Session::flash('msg', 'Berhasil Mengubah Data User');
-            return redirect()->route('admin.petugas');
-        }
+    public function store(Request $request){
+        $request->validate([
+            'username' => 'unique:petugas',
+        ]);
+        $user = new Petugas;
+        $user->nama = $request->nama;
+        $user->username = $request->username;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        Session::flash('msg', 'Berhasil Menambah Data');
+        return redirect()->route('petugas.index');
     }
+
+    public function edit($id)
+    {
+        $data = [
+            'title' => 'Edit Petugas',
+            'petugas' => Petugas::find($id)
+        ];
+
+        return view('admin.petugas.edit',$data);
+    }
+
+
 
     /**
      * Display the specified resource.
@@ -87,18 +62,6 @@ class PetugasController extends Controller
         ];
         return view('admin_rontgen_detail',$data);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -106,9 +69,35 @@ class PetugasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $user = Petugas::find($request->id);
+
+            $request->validate([
+                'username'=> Rule::unique('petugas')->ignore($user->id)
+            ]);
+
+            if($request->password == null){
+                $password = $request->password_lama;
+            }else{
+                $password = Hash::make($request->password);
+            }
+
+            if ($request->nama_user == null) {
+                session(['nama.admin' => $user->nama_user]);
+            }else{
+                session()->forget('nama.admin');
+                session(['nama.admin' => $request->nama_user]);
+            }
+
+            $user->nama = $request->nama;
+            $user->username = $request->username;
+            $user->password = $password;
+            $user->save();
+
+
+            Session::flash('msg', 'Berhasil Mengubah Data');
+            return redirect()->route('petugas.index');
     }
 
     /**

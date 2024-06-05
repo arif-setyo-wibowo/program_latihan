@@ -7,6 +7,8 @@ use App\Models\Cabor;
 use App\Models\Kategori;
 use App\Models\Materi;
 use App\Models\Langganan;
+use App\Models\Atlet;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -51,4 +53,13 @@ class FrontController extends Controller
 
         return view('front/course', compact('kategori', 'materi', 'materi_now'));
     }
+
+    public function profil()
+    {
+
+        $user_id = Session::get('user.email');
+        $atlet = Atlet::where('email',$user_id)->get();
+        return view('front.profile', compact('atlet'));
+    }
+
 }

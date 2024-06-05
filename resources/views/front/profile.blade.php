@@ -27,14 +27,14 @@
                         <div
                             class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">
                             <div class="user-profile-info">
-                                <h4>John Doe</h4>
-                                <ul
+                                <h4>{{ $atlet[0]->nama}}</h4>
+                                {{-- <ul
                                     class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-2">
                                     <li class="list-inline-item">
                                         <i class="mdi mdi-calendar-blank-outline me-1 mdi-20px"></i
                                         ><span class="fw-medium"> Bergabung pada April 2021</span>
                                     </li>
-                                </ul>
+                                </ul> --}}
                             </div>
                         </div>
                     </div>
@@ -49,11 +49,11 @@
                     <ul class="list-unstyled my-3 py-1">
                         <li class="d-flex align-items-center mb-3">
                             <i class="mdi mdi-account-outline mdi-24px"></i
-                            ><span class="fw-medium mx-2">Nama Lengkap:</span> <span>John Doe</span>
+                            ><span class="fw-medium mx-2">Nama Lengkap:</span> <span>{{ $atlet[0]->nama}}</span>
                         </li>
                         <li class="d-flex align-items-center mb-3">
                             <i class="mdi mdi-email-outline mdi-24px"></i><span class="fw-medium mx-2">Email:</span>
-                            <span>johndoe@gmail.com</span>
+                            <span>{{ $atlet[0]->email}}</span>
                         </li>
                     </ul>
                     <small class="card-text text-uppercase">Langganan</small>
@@ -62,7 +62,7 @@
                             <i class="mdi mdi-check mdi-24px"></i><span class="fw-medium mx-2">Status Langganan:</span>
                             <span>Aktif</span>
                         </li>
-                        <li class="d-flex align-items-center mb-3">
+                        {{-- <li class="d-flex align-items-center mb-3">
                             <i class="mdi mdi-clock-start mdi-24px"></i><span class="fw-medium mx-2">Mulai Langganan:</span>
                             <span>24/10/2023</span>
                         </li>
@@ -73,7 +73,7 @@
                         <li class="d-flex align-items-center mb-3">
                             <i class="mdi mdi-flag-outline mdi-24px"></i><span class="fw-medium mx-2">Kategori Langganan:</span>
                             <span>6 Bulan</span>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>

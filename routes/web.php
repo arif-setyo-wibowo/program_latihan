@@ -7,6 +7,7 @@ use App\Http\Controllers\CaborController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\AtletController;
+use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Front\PaymentController;
 use App\Http\Controllers\LanggananController;
@@ -36,6 +37,13 @@ Route::controller(PaymentController::class)->group(function () {
 Route::controller(FrontController::class)->group(function () {
     Route::get('/home', 'home')->name('home');
     Route::get('/course/{id}', 'course')->name('course');
+    Route::get('/profile', 'profil')->name('profil');
+});
+
+Route::controller(LoginController::class)->prefix('login')->group(function () {
+    Route::get('/', 'loginFront')->name('login.front');
+    Route::post('/', 'postloginfront')->name('post.login.front');
+    Route::get('/logout-front', 'logout_front')->name('logout.front');
 });
 
 Route::controller(LoginController::class)->prefix('admin/login')->group(function () {
@@ -75,19 +83,10 @@ Route::middleware('petugas')->prefix('/admin')->group(function () {
         Route::get('/', 'logout')->name('admin.logout');
     });
 
-    // Route::controller(PetugasController::class)->prefix('/petugas')->group(function () {
-    //     Route::get('/', 'index')->name('admin.petugas');
-    //     Route::post('/', 'storeUpdate')->name('petugas.store.update');
-    //     Route::get('/delete', 'destroy')->name('delete.petugas');
-    // });
-
-
+    Route::resource('petugas', PetugasController::class);
 
 });
 
-Route::get('/login', function () {
-    return view('front/login');
-});
 
 Route::get('/forgot', function () {
     return view('front/forgot-password');
@@ -95,14 +94,6 @@ Route::get('/forgot', function () {
 
 Route::get('/new', function () {
     return view('front/new-password');
-});
-
-Route::get('/landing', function () {
-    return view('front/landing');
-});
-
-Route::get('/profile', function () {
-    return view('front/profile');
 });
 
 
