@@ -26,10 +26,6 @@
                     <p class="mb-3 px-2">
                         Tingkatkan keterampilan anda dengan program latihan terpercaya dalam berbagai cabang olahraga.
                     </p>
-                    <div class="d-flex align-items-center justify-content-between app-academy-md-80">
-                        <input type="search" placeholder="Cari cabang olahraga" class="form-control me-2" />
-                        <button type="submit" class="btn btn-primary btn-icon"><i class="mdi mdi-magnify"></i></button>
-                    </div>
                 </div>
                 <div class="app-academy-md-25 d-flex align-items-end justify-content-end">
                     <img
