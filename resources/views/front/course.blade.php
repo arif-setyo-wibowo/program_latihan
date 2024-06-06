@@ -28,27 +28,39 @@
                         @else
                             <div class="cursor-pointer">
                                 @php
-                                    // Extract video ID for YouTube
-                                    $video_id = '';
-                                    // Check if link is from YouTube in short format
-                                    if (strpos($materi_now->link, 'youtu.be') !== false) {
-                                        $video_id = basename(parse_url($materi_now->link, PHP_URL_PATH));
-                                    } else {
-                                        // Check if link is from YouTube in full format
-                                        parse_str(parse_url($materi_now->link, PHP_URL_QUERY), $video_params);
-                                        if (isset($video_params['v'])) {
-                                            $video_id = $video_params['v'];
-                                        } else {
-                                            $video_id = basename(parse_url($materi_now->link, PHP_URL_PATH));
-                                        }
-                                    }
-                                @endphp
+                                $video_id = '';
+                                $is_youtube = false;
+                                $is_google_drive = false;
 
-                                @if(!empty($video_id))
-                                    <iframe class="w-100" id="plyr-video-player" playsinline controls height="650" src="https://www.youtube.com/embed/{{ $video_id }}"></iframe>
-                                @else
-                                    <p>Link yang diberikan bukan dari YouTube.</p>
-                                @endif
+                                // Check if link is from YouTube
+                                if (strpos($materi->link, 'youtu.be') !== false) {
+                                    // Short format YouTube link
+                                    $video_id = basename(parse_url($materi->link, PHP_URL_PATH));
+                                    $is_youtube = true;
+                                } elseif (strpos($materi->link, 'youtube.com') !== false) {
+                                    // Full format YouTube link
+                                    parse_str(parse_url($materi->link, PHP_URL_QUERY), $video_params);
+                                    if (isset($video_params['v'])) {
+                                        $video_id = $video_params['v'];
+                                        $is_youtube = true;
+                                    }
+                                } elseif (strpos($materi->link, 'drive.google.com') !== false) {
+                                    // Google Drive link
+                                    $path_parts = explode('/', parse_url($materi->link, PHP_URL_PATH));
+                                    if (in_array('file', $path_parts) && in_array('d', $path_parts)) {
+                                        $video_id = $path_parts[array_search('d', $path_parts) + 1];
+                                        $is_google_drive = true;
+                                    }
+                                }
+                            @endphp
+
+                            @if($is_youtube)
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ $video_id }}" frameborder="0" allowfullscreen></iframe>
+                            @elseif($is_google_drive)
+                                <iframe src="https://drive.google.com/file/d/{{ $video_id }}/preview" width="640" height="480" allow="autoplay"></iframe>
+                            @else
+                                <p>Video tidak ditemukan atau format link tidak didukung.</p>
+                            @endif
                             </div>
                         @endif
                     </div>

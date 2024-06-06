@@ -4,7 +4,7 @@
     <h4 class="py-3 mb-4"><span class="text-muted fw-light">Logistics /</span> Dashboard</h4>
 
     <!-- Card Border Shadow -->
-    <div class="row">
+    {{-- <div class="row">
       <div class="col-sm-6 col-lg-3 mb-4">
         <div class="card card-border-shadow-primary h-100">
           <div class="card-body">
@@ -81,7 +81,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
   </div>
   <!-- / Content -->
 @endsection
