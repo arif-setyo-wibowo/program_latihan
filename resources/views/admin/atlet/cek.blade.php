@@ -58,6 +58,7 @@
                             <th>Harga</th>
                             <th>Tanggal Awal</th>
                             <th>Tanggal Selesai </th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,11 +67,10 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->atlet->nama }}</td>
                             <td>{{ $item->atlet->email }}</td>
+                            <td>{{ $item->langganan->nama_langganan }}</td>
                             <td>Rp. {{ number_format($item->langganan->harga,0, ',', '.')  }}</td>
-                            <td>{{ \Carbon\Carbon::parse($item->tanggal_awal)->format('d-m-Y') }}
-                            </td>
-                            <td>{{ \Carbon\Carbon::parse($item->tanggal_akhir)->format('d-m-Y') }}
-                            </td>
+                            <td>{{ \Carbon\Carbon::parse($item->tanggal_awal)->format('d-m-Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->tanggal_akhir)->format('d-m-Y') }}</td>
                             <td>
                                 @if ($item->status_langganan == 1)
                                     <button class="btn btn-success">Langganan</button>

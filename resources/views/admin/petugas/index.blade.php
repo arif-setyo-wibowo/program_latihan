@@ -100,7 +100,17 @@
                         <input type="password" class="form-control" id="basic-default-fullname" name="password" placeholder="Olahraga" required/>
                         <label for="basic-default-fullname">Password</label>
                     </div>
-                    <button type="submit" class="btn btn-primary">Tambah</button>
+                    <div class="form-floating form-floating-outline form-floating-bootstrap-select">
+                        <div class="dropdown bootstrap-select w-100 dropup">
+                        <select id="selectpickerBasic" class="selectpicker w-100" data-style="btn-default" tabindex="null" name="role" required>
+                            <option selected value="" disabled>Pilih Role</option>
+                            <option value="0">Admin</option>
+                            <option value="1">Pelatih</option>
+                        </select>
+                       </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-3">Tambah</button>
                 </form>
             </div>
           </div>

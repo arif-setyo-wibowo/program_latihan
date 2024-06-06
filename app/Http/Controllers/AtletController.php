@@ -99,14 +99,15 @@ class AtletController extends Controller
             $pembelian->idatlet = $request->atlet;
             $pembelian->idlangganan = $atlet->idlangganan;
             $pembelian->tanggal_awal = now();
-
+            $tgl = now();
+            
             // Tentukan tanggal akhir berdasarkan jenis langganan
-            if ($atlet->idlangganan == 1) {
-                $tanggal = $pembelian->tanggal_awal->addMonths(1);
-            } elseif ($atlet->idlangganan == 2) {
-                $tanggal = $pembelian->tanggal_awal->addMonths(6);
-            } elseif ($atlet->idlangganan == 3) {
-                $tanggal = $pembelian->tanggal_awal->addYear();
+            if ($atlet->idlangganan === 1) {
+                $tanggal = $tgl->addMonths(1);
+            } elseif ($atlet->idlangganan === 2) {
+                $tanggal = $tgl->addMonths(6);
+            } elseif ($atlet->idlangganan === 3) {
+                $tanggal = $tgl->addYear();
             }
             $pembelian->tanggal_akhir = $tanggal;
             $pembelian->status_langganan = '1';

@@ -32,6 +32,7 @@ class PetugasController extends Controller
         $user->nama = $request->nama;
         $user->username = $request->username;
         $user->password = Hash::make($request->password);
+        $user->role = $request->role;
         $user->save();
         Session::flash('msg', 'Berhasil Menambah Data');
         return redirect()->route('petugas.index');
@@ -93,6 +94,7 @@ class PetugasController extends Controller
             $user->nama = $request->nama;
             $user->username = $request->username;
             $user->password = $password;
+            $user->role = $request->role;
             $user->save();
 
 

@@ -84,59 +84,77 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboards -->
-            <li class="menu-item  {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
-                <a href="{{ route('dashboard.index')}}" class="menu-link">
-                    <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
-                    <div>Dashboards</div>
-                </a>
-            </li>
+
 
             <!-- Apps & Pages -->
-            <li class="menu-header fw-medium mt-4">
-              <span class="menu-header-text">Action Data</span>
-            </li>
-            <li class="menu-item  {{ request()->routeIs('cabor.index') ? 'active' : '' }}">
-              <a href="{{ route('cabor.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-run"></i>
-                <div>Olahraga</div>
-              </a>
-            </li>
-            <li class="menu-item  {{ request()->routeIs('kategori.index') ? 'active' : '' }}">
-                <a href="{{ route('kategori.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-basketball"></i>
-                <div>Kategori Latihan</div>
-              </a>
-            </li>
-            <li class="menu-item  {{ request()->routeIs('materi.index') ? 'active' : '' }}">
-                <a href="{{ route('materi.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons mdi  mdi-clipboard-outline"></i>
-                <div>Materi</div>
-              </a>
-            </li>
-            <li class="menu-item {{ request()->routeIs('atlet.index') ? 'active' : '' }}">
-                <a href="{{ route('atlet.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons mdi  mdi-account-supervisor-outline"></i>
-                <div>Atlet</div>
-              </a>
-            </li>
-            <li class="menu-item {{ request()->routeIs('pembelian.index') ? 'active' : '' }}">
-                <a href="{{ route('pembelian.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons mdi  mdi-account-supervisor-outline"></i>
-                    <div>Langganan</div>
-                </a>
-            </li>
-            <li class="menu-item  {{ request()->routeIs('langganan.index') ? 'active' : '' }}">
-                <a href="{{ route('langganan.index')}}" class="menu-link">
-                  <i class="menu-icon tf-icons mdi mdi-run"></i>
-                  <div>Harga Langganan</div>
-                </a>
-              </li>
-            <li class="menu-item {{ request()->routeIs('petugas.index') ? 'active' : '' }}">
-                <a href="{{ route('petugas.index')}}" class="menu-link">
-                  <i class="menu-icon tf-icons mdi mdi-account"></i>
-                  <div>Petugas</div>
-                </a>
-              </li>
+
+            @if (session('pelatih'))
+                <li class="menu-item  {{ request()->routeIs('dashboard.index.pelatih') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard.index.pelatih')}}" class="menu-link">
+                        <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
+                        <div>Dashboards</div>
+                    </a>
+                </li>
+                <li class="menu-header fw-medium mt-4">
+                    <span class="menu-header-text">Action Data</span>
+                  </li>
+                <li class="menu-item {{ request()->routeIs('kategori.index') ? 'active' : '' }}">
+                    <a href="{{ route('kategori.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons mdi mdi-basketball"></i>
+                        <div>Kategori Latihan</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->routeIs('materi.index') ? 'active' : '' }}">
+                    <a href="{{ route('materi.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons mdi mdi-clipboard-outline"></i>
+                        <div>Materi</div>
+                    </a>
+                </li>
+            @endif
+
+            @if (session('admin'))
+                <li class="menu-item  {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard.index')}}" class="menu-link">
+                        <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
+                        <div>Dashboards</div>
+                    </a>
+                </li>
+                <li class="menu-header fw-medium mt-4">
+                    <span class="menu-header-text">Action Data</span>
+                  </li>
+                <li class="menu-item {{ request()->routeIs('cabor.index') ? 'active' : '' }}">
+                    <a href="{{ route('cabor.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons mdi mdi-run"></i>
+                        <div>Olahraga</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->routeIs('atlet.index') ? 'active' : '' }}">
+                    <a href="{{ route('atlet.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons mdi mdi-account-supervisor-outline"></i>
+                        <div>Atlet</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->routeIs('pembelian.index') ? 'active' : '' }}">
+                    <a href="{{ route('pembelian.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons mdi mdi-account-supervisor-outline"></i>
+                        <div>Langganan</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->routeIs('langganan.index') ? 'active' : '' }}">
+                    <a href="{{ route('langganan.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons mdi mdi-run"></i>
+                        <div>Harga Langganan</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->routeIs('petugas.index') ? 'active' : '' }}">
+                    <a href="{{ route('petugas.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons mdi mdi-account"></i>
+                        <div>Petugas</div>
+                    </a>
+                </li>
+            @endif
+
+
           </ul>
         </aside>
         <!-- / Menu -->
@@ -177,7 +195,7 @@
                           </div>
                           <div class="flex-grow-1">
                             <span class="fw-medium d-block">{{ session('user.nama')}}</span>
-                            <small class="text-muted">Admin</small>
+                            <small class="text-muted">{{ session('user.role') }}</small>
                           </div>
                         </div>
                       </a>
@@ -185,14 +203,19 @@
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
-                    <li>
+                    {{-- <li>
                       <a class="dropdown-item" href="pages-profile-user.html">
                         <i class="mdi mdi-account-outline me-2"></i>
                         <span class="align-middle">My Profile</span>
                       </a>
-                    </li>
+                    </li> --}}
                     <li>
-                      <a class="dropdown-item" href="{{ route('admin.logout')}}">
+                        @if (session('pelatih'))
+                            <a class="dropdown-item" href="{{ route('admin.logout.pelatih')}}">
+                        @endif
+                        @if (session('admin'))
+                            <a class="dropdown-item" href="{{ route('admin.logout')}}">
+                        @endif
                         <i class="mdi mdi-logout me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>
