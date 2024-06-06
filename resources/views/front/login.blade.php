@@ -3,13 +3,24 @@
     <div class="card-body mt-2">
         <h4 class="mb-2">Selamat Datang! 👋</h4>
         <p class="mb-4">Login untuk memulai berlatih dengan program kami</p>
-        @if ($errors->any())
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    @foreach ($errors->all() as $error)
-                            <i class="bi bi-exclamation-octagon me-1"> {{ $error }} </i><br>
-                        @endforeach
-                    </div>
-                @endif
+        <?php if (session()->has('msg')):?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert" id="autoDismissAlert" style="margin:5px;">
+                {{ session('msg') }}
+            </div>
+            <?php endif ?>
+
+            @if(Session::has('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" id="autoDismissAlert"style="margin:5px;">
+                    {{ Session::get('error') }}
+                </div>
+            @endif
+            @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" id="autoDismissAlert"style="margin:5px;">
+                @foreach ($errors->all() as $error)
+                {{ $error }} </i><br>
+            @endforeach
+            </div>
+          @endif
 
         <form id="formAuthentication" class="mb-3" action="{{ route('post.login.front')}}" method="post">
             @csrf
