@@ -92,7 +92,6 @@ class AtletController extends Controller
             // Temukan atlet berdasarkan ID dan set statusnya menjadi '1'
             $atlet = Atlet::find($request->atlet);
             $atlet->status = '1';
-            $atlet->save();
 
             // Buat pembelian baru
             $pembelian = new Pembelian;
@@ -107,9 +106,8 @@ class AtletController extends Controller
                 $tanggal = (clone $tgl)->addMonths(6);
             } elseif ($atlet->idlangganan === 3) {
                 $tanggal = (clone $tgl)->addYear();
-            } 
+            }
             $pembelian->status_langganan = '1';
-            $pembelian->save();
 
             $akun = AtletLogin::where('email', $atlet->email)->first();
             $password = "12345678";
@@ -117,6 +115,10 @@ class AtletController extends Controller
             $akun->email = $atlet->email;
             $akun->password = Hash::make($password);
             $akun->status = '1';
+
+            $atlet->save();
+
+            $pembelian->save();
             $akun->save();
 
             // $urlLogin = route('login');
