@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 use App\Mail\AccountCreated;
 
 class AtletController extends Controller
@@ -98,16 +99,20 @@ class AtletController extends Controller
             $pembelian->idatlet = $request->atlet;
             $pembelian->idlangganan = $atlet->idlangganan;
             $pembelian->tanggal_awal = now();
+
             $tgl = now();
 
-            if ($atlet->idlangganan === 1) {
-                $tanggal = (clone $tgl)->addMonths(1);
-            } elseif ($atlet->idlangganan === 2) {
-                $tanggal = (clone $tgl)->addMonths(6);
-            } elseif ($atlet->idlangganan === 3) {
-                $tanggal = (clone $tgl)->addYear();
-            }
-            $pembelian->tanggal_akhir = $tanggal;
+            // Definisikan mapping untuk idlangganan ke fungsi yang mengubah tanggal
+            $idlanggananMapping = [
+                1 => fn(Carbon $date) => $date->copy()->addMonths(1),
+                2 => fn(Carbon $date) => $date->copy()->addMonths(6),
+                3 => fn(Carbon $date) => $date->copy()->addYear(),
+            ];
+
+            // Default ke tanggal sekarang jika idlangganan tidak ada di mapping
+            $tanggal = $idlanggananMapping[$atlet->idlangganan] ?? fn($date) => $date->copy();
+
+            $pembelian->tanggal_akhir = $tanggal($tgl);
             $pembelian->status_langganan = '1';
 
             $akun = AtletLogin::where('email', $atlet->email)->first();
