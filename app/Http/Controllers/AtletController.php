@@ -107,6 +107,7 @@ class AtletController extends Controller
             } elseif ($atlet->idlangganan === 3) {
                 $tanggal = (clone $tgl)->addYear();
             }
+            $pembelian->tanggal_akhir = $tanggal;
             $pembelian->status_langganan = '1';
 
             $akun = AtletLogin::where('email', $atlet->email)->first();
