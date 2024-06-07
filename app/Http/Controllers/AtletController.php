@@ -92,7 +92,6 @@ class AtletController extends Controller
             // Temukan atlet berdasarkan ID dan set statusnya menjadi '1'
             $atlet = Atlet::find($request->atlet);
             $atlet->status = '1';
-            $atlet->save();
 
             // Buat pembelian baru
             $pembelian = new Pembelian;
@@ -100,18 +99,21 @@ class AtletController extends Controller
             $pembelian->idlangganan = $atlet->idlangganan;
             $pembelian->tanggal_awal = now();
             $tgl = now();
-            
+
             // Tentukan tanggal akhir berdasarkan jenis langganan
             if ($atlet->idlangganan === 1) {
                 $tanggal = $tgl->addMonths(1);
+                $pembelian->tanggal_akhir = $tanggal;
             } elseif ($atlet->idlangganan === 2) {
                 $tanggal = $tgl->addMonths(6);
+                $pembelian->tanggal_akhir = $tanggal;
             } elseif ($atlet->idlangganan === 3) {
                 $tanggal = $tgl->addYear();
+                $pembelian->tanggal_akhir = $tanggal;
             }
-            $pembelian->tanggal_akhir = $tanggal;
             $pembelian->status_langganan = '1';
-            $pembelian->save();
+
+
 
             $akun = AtletLogin::where('email', $atlet->email)->first();
             $password = "12345678";
@@ -119,6 +121,9 @@ class AtletController extends Controller
             $akun->email = $atlet->email;
             $akun->password = Hash::make($password);
             $akun->status = '1';
+            
+            $atlet->save();
+            $pembelian->save();
             $akun->save();
 
             // $urlLogin = route('login');
